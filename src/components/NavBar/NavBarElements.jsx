@@ -10,6 +10,7 @@ export const Nav = styled.nav`
   z-index: 100;
   position: fixed;
   width: 100%;
+  background: ${({ navBar }) => (navBar ? '#cd853f' : null)};
 `;
 
 const NavLink = css`

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { menuData } from '../../data/MenuData';
 import { Button } from '../Button';
 import {
@@ -11,8 +11,20 @@ import {
 } from './NavBarElements';
 
 const Navbar = ({ toggle }) => {
+  const [navBar, setNavBar] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY >= 80) {
+      setNavBar(true);
+    } else {
+      setNavBar(false);
+    }
+  };
+
+  window.addEventListener('scroll', changeBackground);
+
   return (
-    <Nav>
+    <Nav navBar={navBar}>
       <Logo to='/'>WUCHI</Logo>
       <MenuBar onClick={toggle} />
       <NavMenu>
