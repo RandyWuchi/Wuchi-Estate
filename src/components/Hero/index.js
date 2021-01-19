@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '../Button';
 import {
@@ -60,18 +61,36 @@ const Hero = ({ slides }) => {
                 <HeroSlider>
                   <HeroImage src={slide.image} alt={slide.alt} />
                   <HeroContent>
-                    <h1> {slide.title} </h1>
-                    <p>{slide.price}</p>
-                    <Button
-                      to={slide.path}
-                      primary='true'
-                      css={`
-                        max-width: 160px;
-                      `}
+                    <motion.h1
+                      initial={{ opacity: 0, y: -50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      {slide.label}
-                      <Arrow />
-                    </Button>
+                      {slide.title}
+                    </motion.h1>
+                    <motion.p
+                      initial={{ opacity: 0, y: -100 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {slide.price}
+                    </motion.p>
+                    <motion.div
+                      initial={{ scale: 1.05 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Button
+                        to={slide.path}
+                        primary='true'
+                        css={`
+                          max-width: 160px;
+                        `}
+                      >
+                        {slide.label}
+                        <Arrow />
+                      </Button>
+                    </motion.div>
                   </HeroContent>
                 </HeroSlider>
               )}

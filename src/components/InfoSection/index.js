@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { Button } from '../Button';
 import {
@@ -27,7 +28,12 @@ const InfoSection = ({
           </Button>
         </ColumnLeft>
         <ColumnRight reverse={reverse}>
-          <img src={image} alt='home' />
+          <motion.img
+            animate={{ scale: [2, 1] }}
+            transition={{ duration: 0.5 }}
+            src={image}
+            alt='home'
+          />
         </ColumnRight>
       </Container>
     </Section>
