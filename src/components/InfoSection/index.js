@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Button } from '../Button';
 import {
   Section,
@@ -16,6 +17,15 @@ const InfoSection = ({
   image,
   reverse,
 }) => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
   return (
     <Section>
       <Container>
@@ -29,8 +39,14 @@ const InfoSection = ({
         </ColumnLeft>
         <ColumnRight reverse={reverse}>
           <motion.img
-            animate={{ scale: [2, 1] }}
-            transition={{ duration: 0.5 }}
+            ref={ref}
+            animate={controls}
+            initial='hidden'
+            transition={{ duration: 1 }}
+            variants={{
+              visible: { scale: 1 },
+              hidden: { scale: 1.2 },
+            }}
             src={image}
             alt='home'
           />
